@@ -1,0 +1,4 @@
+mabs_wamp_v_host:
+    resource: "@MabsWampVHostBundle/Resources/config/routing.yml"
+    prefix:   /
+

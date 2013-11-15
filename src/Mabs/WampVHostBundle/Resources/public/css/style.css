@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+}
+
+#wrap {
+    height: auto;
+    margin: 0 auto -60px;
+    min-height: 100%;
+    padding: 0 0 60px;
+}
+
+#wrap > .container {
+    padding: 60px 15px 0;
+}
+
+#footer {
+    background-color: #ebebeb;
+    height: 60px;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#footer .container .credit {
+	text-align: center;
+}

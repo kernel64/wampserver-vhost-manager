@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">List of virtual host on your server</div>
+  <table class="table">
+  	<thead>
+  		<th>#</th>
+  		<th>Name</th>
+  		<th>Port</th>
+  		<th>Path</th>
+  		<th>Actions</th>
+  	</thead>
+  	<tbody>
+  		{% for vh in vhosts  %}
+  		<tr>
+  			<td>{{ loop.index }}</td>
+  			<td><a href="http://{{ vh['name']|trim }}:{{ vh['port'] }}" target="_blank">{{ vh['name']|trim }}</a></td>
+  			<td>{{ vh['port'] }}</td>
+  			<td>{{ vh['docRoot'] }}</td>
+  			<td>{{ ja_link({'update': '#formDiv', 'url': path('show_vhost', { 'filename': vh['basename']|trim }), 'class': 'btn btn-primary', 'text': '<span class="glyphicon glyphicon-wrench"></span>'  }) }}
+  			
+  			    {{ ja_link({'update': '#listDiv', 'url': path('delete_vhost', { 
+  			    'filename': vh['basename']|trim }),
+  			    'class': 'btn btn-danger',
+  			    'confirm': true,
+  			    'text': '<span class="glyphicon glyphicon-remove-sign"></span>'  }) }}
+  			</td>	
+  		</tr>
+  		{% endfor %}
+  	</tbody>
+  </table>
+</div>

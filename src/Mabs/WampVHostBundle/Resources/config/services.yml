@@ -1,0 +1,22 @@
+parameters:
+    mabs_wamp_v_host.manager.class:  Mabs\WampVHostBundle\VHost\Manager
+    mabs_wamp_v_host.config:
+        vhost_dir:  %vhost_dir%
+        batch_file: %batch_file%
+        definition: | 
+            <VirtualHost *:80>
+               ServerName #servername#
+               DocumentRoot "#documentroot#"
+               DirectoryIndex index.php
+             <Directory "#documentroot#">
+               Options Indexes FollowSymLinks Includes ExecCGI
+               AllowOverride All
+               Order allow,deny
+               Allow from all
+             </Directory>
+            </VirtualHost>
+
+services:
+    mabs_wamp_v_host.manager:
+        class: %mabs_wamp_v_host.manager.class%
+        arguments: [@service_container, %mabs_wamp_v_host.config%]

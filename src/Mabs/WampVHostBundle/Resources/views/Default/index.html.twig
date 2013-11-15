@@ -1,0 +1,11 @@
+{% extends "MabsWampVHostBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="formDiv">
+
+</div>
+
+<div id="listDiv">
+	{{ render(controller('MabsWampVHostBundle:Vhost:list')) }}
+</div>
+{% endblock %}

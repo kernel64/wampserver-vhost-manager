@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Wampserver vHost Manager{% endblock %}</title>
+		{% stylesheets '../app/Resources/public/css/*' %}
+		    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+		{% endstylesheets %}
+        
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block global %}{% endblock %}
+        
+        {% javascripts	
+        '../app/Resources/public/js/jquery.min.js'
+        '../app/Resources/public/js/*' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

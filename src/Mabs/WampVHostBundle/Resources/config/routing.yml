@@ -1,0 +1,27 @@
+homepage:
+    pattern:  /
+    defaults: { _controller: MabsWampVHostBundle:Default:index }
+
+restart:
+    pattern:  /restart
+    defaults: { _controller: MabsWampVHostBundle:Default:restart }
+
+new_vhost:
+    pattern:  /new-virtual-host
+    defaults: { _controller: MabsWampVHostBundle:Vhost:new }
+
+list_vhost:
+    pattern:  /list-virtual-host
+    defaults: { _controller: MabsWampVHostBundle:Vhost:list }
+    
+show_vhost:
+    pattern:  /show/{filename}
+    defaults: { _controller: MabsWampVHostBundle:Vhost:show }    
+    
+update_vhost:
+    pattern:  /update/{filename}
+    defaults: { _controller: MabsWampVHostBundle:Vhost:update }
+    
+delete_vhost:
+    pattern:  /delete/{filename}
+    defaults: { _controller: MabsWampVHostBundle:Vhost:delete }
