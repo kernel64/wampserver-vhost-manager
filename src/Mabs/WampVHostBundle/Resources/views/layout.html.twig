@@ -55,6 +55,24 @@
 			$('#formDiv').html('');
 			return false;
 		});
+                
+                $('#formDiv').on('submit', '#createForm', function() {
+                    url = $('#createForm').attr('action');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#createForm').serialize()
+                      }).done(function(data) {
+                          if(data != '') {
+                              $('#formDiv').html(data);
+                          } else {
+                              $('#formDiv').html('');
+                              {{ ja_request({'update': '#listDiv', 'url': path('list_vhost')  }) }}
+                          }
+                      });
+                      
+                      return false;
+                });
 	});
 </script>
 {% endblock %}

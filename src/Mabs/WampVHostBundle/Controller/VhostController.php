@@ -3,25 +3,33 @@
 namespace Mabs\WampVHostBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class VhostController extends Controller
 {
     public function newAction()
     {
     	$request = $this->getRequest();
-
-    	if(!$request->isXmlHttpRequest() && $request->isMethod('POST')) {
-    		
-    		$vHost = $this->get('mabs_wamp_v_host.manager');
-    		$domainName = $request->request->get('servername');
-    		$docRoot    = $request->request->get('documentroot');
-    		
-    		$vHost->createNewVHost($domainName, $docRoot);
-    		
-    		return $this->redirect($this->generateUrl('homepage'), 301);
+        $form = $this->createFormBuilder()
+        ->add('servername', 'text', array(
+                                    'constraints' => new NotBlank()
+                                           ))
+        ->add('documentroot', 'text', array(
+                                    'constraints' => new NotBlank()
+                                           ))
+        ->getForm();
+    	if($request->isXmlHttpRequest() && $request->isMethod('POST')) {	
+    		$vHost = $this->get('mabs_wamp_v_host.manager');            
+                $form->handleRequest($request);
+                if ($form->isValid()) {              
+                    $data = $form->getData();     
+                    $vHost->createNewVHost($data['servername'], $data['documentroot']);
+	
+                    return $this->render('MabsWampVHostBundle:Vhost:empty.html.twig');      
+                }
     	}
     	
-        return $this->render('MabsWampVHostBundle:Vhost:new.html.twig');
+        return $this->render('MabsWampVHostBundle:Vhost:new.html.twig', array('form' => $form->createView()));
     }
     
     public function updateAction($filename)
