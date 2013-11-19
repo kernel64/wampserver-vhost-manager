@@ -1,8 +1,9 @@
-<form action="{{ path('update_vhost', { 'filename': filename|trim }) }}" method="post" class="form-horizontal" role="form">
-
+<form id="createForm" action="{{ path('update_vhost', { 'filename': filename|trim }) }}" method="post" class="form-horizontal" role="form" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
   <div class="form-group">
     <div class="col-sm-12">
-      <textarea name="config" class="form-control" rows="3">{{ data|raw }}</textarea>
+        {{ form_errors(form.config) }}
+        {{ form_widget(form.config, { 'attr': {'class': 'form-control', 'row': "3"} }) }}
     </div>
   </div>
 
@@ -12,4 +13,5 @@
       <button type="button" class="btn btn-default cancel">Cancel</button>
     </div>
   </div>
+     {{ form_rest(form) }}
 </form>
