@@ -4,6 +4,7 @@ namespace Mabs\WampVHostBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class VhostController extends Controller
 {
@@ -36,10 +37,14 @@ class VhostController extends Controller
     public function updateAction($filename)
     {
         $request = $this->getRequest();
-
         $form = $this->createFormBuilder()
                 ->add('config', 'textarea', array(
-                    'constraints' => new NotBlank()
+                    'constraints' => array(
+                        new NotBlank(),
+                        new Regex(array(
+                            'pattern' => "#<VirtualHost \*:[0-9]*>((.*)|\n*)*</VirtualHost>$#",
+                            'message' => "Invalid configuration."
+                            )))
                 ))
                 ->getForm();
 
